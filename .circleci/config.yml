@@ -27,10 +27,6 @@ jobs:
                 docker tag testokur-captcha:latest nazmialtun/testokur-captcha:latest
                 docker push nazmialtun/testokur-captcha:latest
                 docker push nazmialtun/testokur-captcha:$IMAGE_TAG
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - deploy.sh
   deploy-prod:
     <<: *defaults
     steps:
