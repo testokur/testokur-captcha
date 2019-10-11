@@ -41,7 +41,7 @@ jobs:
             ssh  $SSH_USERNAME@$PROD_SERVER 'bash -s' < deploy-prod.sh > /dev/null
 workflows:
   version: 2
-  captcha:
+  build-deploy:
     jobs:
-      - build:
-      - deploy-prod:
+      - build
+      - deploy-prod
