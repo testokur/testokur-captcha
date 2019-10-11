@@ -1,4 +1,4 @@
-FROM hahoo/node-gm:latest
+FROM node:8.12.0
 RUN apt-get update \
   && apt-get install -y --no-install-recommends graphicsmagick \
   && apt-get autoremove -y \
