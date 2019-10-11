@@ -1,0 +1,17 @@
+{
+  "name": "testokur-captcha",
+  "version": "1.0.0",
+  "description": "testokur captcha api",
+  "main": "index.js",
+  "repository": "https://github.com/testokur/captcha",
+  "author": "Nazmi Altun",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "svg-captcha": "^1.4.0"
+  }
+}

@@ -1,0 +1,12 @@
+.vscode
+node_modules
+.editorconfig
+.gitignore
+npm-debug.log
+README.md
+Dockerfile*
+docker-compose*
+dist
+.dockerignore
+LICENSE
+yarn-error.log
