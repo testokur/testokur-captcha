@@ -9,6 +9,12 @@ const PORT = 8080;
 const HOST = '0.0.0.0';
 
 const app = express();
+app.get('/', (req, res) => {
+  res.status(200).send('Healthy!')
+});
+app.get('/hc', (req, res) => {
+  res.status(200).send('Healthy!')
+});
 app.get('/captcha', (req, res) => {
     var captcha = svgCaptcha.create({
         width:100,
