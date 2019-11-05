@@ -2,7 +2,7 @@ const router = require('express').Router();
 const svgCaptcha = require('svg-captcha');
 const fs = require('fs');
 const gm = require('gm');
-const cache = require('memory-cache');
+const cache = require('global-cache');
 
 router.get('/:id', (req, res) => {
     var captcha = svgCaptcha.create({
@@ -17,15 +17,15 @@ router.get('/:id', (req, res) => {
         if (err){
           console.log(err);
         }
-        cache.put(req.params.id, captcha.text);
+        cache.set(req.params.id, captcha.text);
         res.type('png').end(buffer);
       })
 });
 router.post('/:id', (req, res) => {
-    if( cache.get(req.params.id) === req.body.captchaText){
-        res.status(200);
+    if(cache.get(req.params.id) === req.body.captchaText){
+        res.status(200).send(true);
     } else {
-        res.status(400);
+        res.status(400).send(false);
     }
 });
 
