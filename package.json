@@ -17,6 +17,8 @@
     "express-jwt": "^5.3.1",
     "global-cache": "^1.2.1",
     "gm": "^1.23.1",
+    "helmet": "^3.21.2",
+    "jwks-rsa": "^1.6.0",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
