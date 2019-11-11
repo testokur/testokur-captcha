@@ -24,11 +24,13 @@ router.get('/:id', (req, res) => {
       });
 });
 router.post('/:id', (req, res) => {
+    console.log(req.body);
     if(cache.get(req.params.id) === req.body.captchaText){
         res.status(200).send(true);
     } else {
         res.status(400).send(false);
     }
+    console.log(res);
 });
 
 module.exports = router;
