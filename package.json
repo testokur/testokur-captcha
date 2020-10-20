@@ -20,6 +20,6 @@
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.5"
+    "nodemon": "^2.0.6"
   }
 }
