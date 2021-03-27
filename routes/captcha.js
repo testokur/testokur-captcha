@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 });
 router.post('/:id', (req, res) => {
     console.log(req.body);
-    if(cache.get(req.params.id) === req.body.captchaText && req.body.captchaText != undefined){
+    if(cache.get(req.params.id) === req.body.captchaText && req.body.captchaText !== undefined){
         res.status(200).send(true);
     } else {
         res.status(400).send(false);
