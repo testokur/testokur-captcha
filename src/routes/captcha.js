@@ -4,6 +4,7 @@ import fs from 'fs';
 import gm from 'gm';
 import cache from 'global-cache';
 import logger from '../utils/logger';
+import {OK, BAD_REQUEST} from 'http-codes';
 
 const router = express.Router();
 
@@ -29,9 +30,9 @@ router.get('/:id', (req, res) => {
 router.post('/:id', (req, res) => {
     logger.info(req.body);
     if(cache.get(req.params.id) === req.body.captchaText && req.body.captchaText !== undefined){
-        res.status(200).send(true);
+        res.status(OK).send(true);
     } else {
-        res.status(400).send(false);
+        res.status(BAD_REQUEST).send(false);
     }
     logger.info(res);
 });

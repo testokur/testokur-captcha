@@ -10,7 +10,7 @@ const HOST = process.env.HOST || '0.0.0.0';
 const app = express();
 
 
-app.use(bodyParser.json()); //TODO: Have a look
+app.use(bodyParser.json());
 app.use(helmet());
 app.use(routes);
 
