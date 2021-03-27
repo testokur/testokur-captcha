@@ -1,0 +1,23 @@
+name: CI
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - 'v*'
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow
+      - name: Build docker image
+        run: docker build  -t nazmialtun/testokur-captcha:${{ github.run_number }} -t nazmialtun/testokur-captcha:${{ github.sha }} -t nazmialtun/testokur-captcha:latest .
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Push Docker Images to Registry
+        run: |
+          docker push nazmialtun/testokur-captcha:${{ github.run_number }}
+          docker push nazmialtun/testokur-captcha:${{ github.sha }}
+          docker push nazmialtun/testokur-captcha:latest
