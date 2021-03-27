@@ -1,13 +1,14 @@
-'use strict';
+import express from 'express';
+import svgCaptcha from 'svg-captcha';
+import fs from 'fs';
+import gm from 'gm';
+import cache from 'global-cache';
+import logger from '../utils/logger';
 
-const router = require('express').Router();
-const svgCaptcha = require('svg-captcha');
-const fs = require('fs');
-const gm = require('gm');
-const cache = require('global-cache');
+const router = express.Router();
 
 router.get('/:id', (req, res) => {
-    var captcha = svgCaptcha.create({
+    const captcha = svgCaptcha.create({
         width:100,
         height:50,
         noise:0
@@ -17,20 +18,22 @@ router.get('/:id', (req, res) => {
       .out('-background', 'none')
       .toBuffer('png',function (err, buffer) {
         if (err){
-          console.log(err);
+          logger.error(err);
         }
         cache.set(req.params.id, captcha.text);
         res.type('png').end(buffer);
+        logger.info(`Captcha image created for id=${req.params.id} text=${captcha.text}`);
       });
 });
+
 router.post('/:id', (req, res) => {
-    console.log(req.body);
+    logger.info(req.body);
     if(cache.get(req.params.id) === req.body.captchaText && req.body.captchaText !== undefined){
         res.status(200).send(true);
     } else {
         res.status(400).send(false);
     }
-    console.log(res);
+    logger.info(res);
 });
 
-module.exports = router;
+export default router;

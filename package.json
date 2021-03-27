@@ -8,8 +8,24 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node server.js",
-    "start:nodemon": "nodemon server.js"
+    "start": "node dist",
+    "lint": "eslint src --fix",
+    "build": "rimraf dist && babel src --copy-files --out-dir dist --source-maps",
+    "start:dev": "nodemon --watch src --exec babel-node src --source-maps"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,yml,yml,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -17,9 +33,19 @@
     "global-cache": "^1.2.1",
     "gm": "^1.23.1",
     "helmet": "^4.4.1",
-    "svg-captcha": "^1.4.0"
+    "svg-captcha": "^1.4.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.13",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.13.12",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "husky": "^5.2.0",
+    "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
   }
 }
